@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input{
+    background-color:  rgb(24, 24, 27);
+    border: solid 1px white ;
+    border-radius: 10px;
+    align-items: center;   
+    padding: 5px;    
+}
+body{
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: left;
+}
+button{
+    /* background-color: rgb(63, 63, 70); */
+    border: solid 1px white ;
+    border-radius: 10px;
+    align-items: center;
+    margin: 10px 5px;
+    padding: 5px;
+    color: white;
+    font-weight: 900;
+}
