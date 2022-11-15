@@ -14,7 +14,19 @@
     
        edit product by codprod
 
-![image](https://user-images.githubusercontent.com/93483481/202043682-f3a79545-a2c7-4796-a301-3d8c340f7fa9.png)
+![image](https://user-images.githubusercontent.com/93483481/202048285-a128f1ad-0ea0-4a32-9e0f-27bedb4e3ac4.png)
+
+           delete with confirm dialog
+           
+![image](https://user-images.githubusercontent.com/93483481/202048362-0a293d9e-4004-42c9-bb5f-186dc9842289.png)
+
+responsive 
+
+![image](https://user-images.githubusercontent.com/93483481/202048438-b4f7db4e-0763-46a8-b780-7d77ab392387.png)
+
+![image](https://user-images.githubusercontent.com/93483481/202048548-582a226f-a930-4237-9a68-c4565ecb39d4.png)
+
+
 
 
 
