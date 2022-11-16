@@ -80,6 +80,29 @@ function ProductoForm() {
             Delete
           </button>
         )}
+        {
+          <>
+            {/* TODO: promp Search  */}
+            {/* <button onClick={() =>window.prompt("Do you really want to leave?")}>Exit</button> */}
+            {/* <button
+              onClick={() => {
+                if (window.confirm("Delete the item?")) {
+                  deleteProductoRequest(producto.codprod);
+                }
+              }}
+            >
+              Sup
+            </button> */}
+            <button
+              onClick={() => {
+                window.confirm("Delete the item?") &&
+                  (deleteProductoRequest(producto.codprod), navigate("/"));
+              }}
+            >
+              Supprimer
+            </button>
+          </>
+        }
       </div>
       <hr className="mb-5" />
       <Formik

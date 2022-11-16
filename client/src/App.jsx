@@ -1,8 +1,5 @@
-import { TaskContextProvider } from "./context/tasks/TaskProvider";
 import Navbar from "./components/Navbar";
 import { Route, Routes } from "react-router-dom";
-import TasksPage from "./pages/task/TasksPage";
-import TaskForm from "./pages/task/TaskForm";
 import NotFound from "./pages/NotFound";
 import Productos from "./pages/producto/ProductosPage";
 import ProductoForm from "./pages/producto/ProductoForm";
@@ -15,17 +12,12 @@ function App() {
         <div className="mx-auto py-4 px-5 lg:px-20">
           {/* TODO: FIX */}
           <ProductoContextProvider>
-            <TaskContextProvider>
-              <Routes>
-                <Route path="/" element={<Productos />} />
-                <Route path="/new" element={<ProductoForm />} />
-                <Route path="/edit/:codprod" element={<ProductoForm />} />
-                <Route path="/tasks/" element={<TasksPage />} />
-                <Route path="/tasks/new" element={<TaskForm />} />
-                <Route path="/tasks/edit/:id" element={<TaskForm />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </TaskContextProvider>
+            <Routes>
+              <Route path="/" element={<Productos />} />
+              <Route path="/new" element={<ProductoForm />} />
+              <Route path="/edit/:codprod" element={<ProductoForm />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
           </ProductoContextProvider>
         </div>
       </div>
