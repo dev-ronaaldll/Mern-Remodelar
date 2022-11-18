@@ -2,6 +2,7 @@ import { pool } from "../db.js";
 
 export const getProductos = async (req, res) => {
   try {
+    // TODO : FIX -1 [-5:]
     const [result] = await pool.query(
       "SELECT * FROM productos ORDER BY codprod DESC LIMIT 5"
     );

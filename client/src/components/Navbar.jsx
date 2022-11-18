@@ -16,7 +16,7 @@ function Navbar() {
         <li>-</li>
         <li>
           <Link to="/new" className=" px-2 py-1">
-            Create task
+            Form 
           </Link>
         </li>
       </ul>

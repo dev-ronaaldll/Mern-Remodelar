@@ -8,6 +8,7 @@ function Productos() {
     loadProductos();
   }, []);
   function renderMain (){
+    // TODO : STUDY THIS
     if(productos.length > 0){
       return productos.map((producto) => (
         <ProductoCard key={producto.codprod} producto={producto} />
@@ -24,8 +25,7 @@ function Productos() {
         <p>Costo</p>
         <p>Precio</p>
         <p></p>
-      </div>
-      {/* TODO: CLICK TO EDIT */}      
+      </div>    
       {renderMain()}
     </div>
   );

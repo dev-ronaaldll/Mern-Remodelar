@@ -54,13 +54,19 @@ export const ProductoContextProvider = ({ children }) => {
       );
     }
   };
-  // useState guarda lo asignado
-  const [codProd, setCodProd] = useState(-1);
   // TODO : CACHE  CODPROD MAX
   // async function startVal() {
-  const startCodProd = async () => {
-    const res = await getProductosRequest();
-    setCodProd(parseInt(res.data[0].codprod) + 1);
+  const lastCodProd = async () => {
+    try {
+      const res = await getProductosRequest();
+      const codProd = parseInt(res.data[0].codprod)+1 || -1;
+      return codProd;
+    } catch (error) {
+      console.log(
+        "🚀 ~ file: ProductoContext.jsx ~ line 65 ~ lastCodProd ~ error",
+        error
+      );
+    }
   };
   const getProducto = async (codprod) => {
     try {
@@ -95,8 +101,7 @@ export const ProductoContextProvider = ({ children }) => {
         loadProductos,
         deleteProducto,
         createProducto,
-        startCodProd,
-        codProd,
+        lastCodProd,
         getProducto,
         updateProducto,
       }}

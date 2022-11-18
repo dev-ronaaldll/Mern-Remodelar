@@ -10,7 +10,7 @@ function ProductoForm() {
   const params = useParams();
   // console.log(params);
   const navigate = useNavigate();
-  const { createProducto, startCodProd, codProd, getProducto, updateProducto } =
+  const { createProducto, lastCodProd, getProducto, updateProducto } =
     useProductos();
   const today = new Date().toJSON().slice(0, 10);
   const [producto, setProducto] = useState({
@@ -36,11 +36,21 @@ function ProductoForm() {
           undfra: producto.undfra,
           pvenfra: producto.pvenfra,
         });
-        console.log("undefined", "undefined", "undefined", producto.fecapa);
+      } else {
+        const codProd = await lastCodProd();
+        setProducto({
+          codprod: codProd,
+          codbar: codProd,
+          nomprod: "",
+          exiprod: "",
+          venprod: "",
+          fecapa: today,
+          undfra: 0,
+          pvenfra: 0,
+        });
       }
     };
     loadProducto();
-    startCodProd();
     // {!params.codprod ?  window.location.reload(false) : null}
   }, []);
   //   function renderMain (){
@@ -61,24 +71,25 @@ function ProductoForm() {
         <p className="text-2xl">Producto no encontrado</p>
       </div>
     );
-  } else {
-    if (codProd === -1) {
-      return <div>Cargando...</div>;
-    }
   }
+  // } else {
+  //   if (codProd === -1) {
+  //     return <div>Cargando...</div>;
+  //   }
+  // }
   return (
     <>
       <div className="flex justify-between items-center">
         <h2>{params.codprod ? "Editar Producto" : "Crear Producto"}</h2>
         {!params.codprod ? null : (
           <button
-            onClick={() => {
-              confirm("Delete?", deleteProductoRequest(producto.codprod)),
-                navigate("/");
-            }}
-          >
-            Delete
-          </button>
+          onClick={() => {
+            window.confirm("Delete the item?") &&
+              (deleteProductoRequest(producto.codprod), navigate("/"));
+          }}
+        >
+          Delete
+        </button>
         )}
         {
           <>
@@ -92,34 +103,27 @@ function ProductoForm() {
               }}
             >
               Sup
-            </button> */}
-            <button
-              onClick={() => {
-                window.confirm("Delete the item?") &&
-                  (deleteProductoRequest(producto.codprod), navigate("/"));
-              }}
-            >
-              Supprimer
-            </button>
+            </button> */}            
           </>
         }
       </div>
       <hr className="mb-5" />
       <Formik
-        initialValues={
-          params.codprod
-            ? producto
-            : {
-                codprod: codProd,
-                codbar: codProd,
-                nomprod: "",
-                exiprod: "",
-                venprod: "",
-                fecapa: today,
-                undfra: 1,
-                pvenfra: 0,
-              }
-        }
+        initialValues={producto}
+        // initialValues={
+        //   params.codprod
+        //     ? producto
+        //     : {
+        //         codprod: codProd,
+        //         codbar: codProd,
+        //         nomprod: "",
+        //         exiprod: "",
+        //         venprod: "",
+        //         fecapa: today,
+        //         undfra: 1,
+        //         pvenfra: 0,
+        //       }
+        // }
         enableReinitialize={true}
         onSubmit={async (values, actions) => {
           if (params.codprod) {
@@ -150,11 +154,11 @@ function ProductoForm() {
           <Form onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 sm:grid-cols-5 gap-y-2 items-center">
               {/* values.x establece valores desde initialValues */}
-              {params.codprod
+              {/* {params.codprod
                 ? null
                 : codProd === values.codbar
                 ? null
-                : window.location.reload(false)}
+                : window.location.reload(false)} */}
               {/* {!params.codprod ?( codProd===values.codbar ? null: window.location.reload(false)) : null} */}
               <label>codprod</label>
               <input
