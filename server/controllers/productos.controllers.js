@@ -88,46 +88,36 @@ export const getLastProducto = async (req, res) => {
   }
 };
 export const searchProductos = async (req, res) => {
-  try {    
+  try {
     const { search } = req.body;
-    console.log(
-      "🚀 ~ file: productos.controllers.js ~ line 93 ~ searchProductos ~ search",
-      search
-    );
-    const words = search.split(",");
-    console.log(words);
-    if (words.length === 1) {
+    if (search === "" || search === undefined) {
       const [result] = await pool.query(
-        "SELECT * FROM productos WHERE codprod = ? OR nomprod LIKE ?",
-        [words[0], `%${words[0]}%`]
-      );
-      console.log("🚀 ~ file: productos.controllers.js ~ line 105 ~ searchProductos ~ result", result);      
-      res.json(result);
-    }
-    else if (words.length === 2) {
-      const [result] = await pool.query(
-        "SELECT * FROM productos WHERE nomprod LIKE ? AND nomprod LIKE ?",
-        [`%${words[0]}%`, `%${words[1]}%`]
+        "SELECT * FROM productos ORDER BY codprod DESC LIMIT 5"
       );
       res.json(result);
+    } else {
+      const words = search.split(",");
+      console.log(words);
+      if (words.length === 1) {
+        const [result] = await pool.query(
+          "SELECT * FROM productos WHERE codprod = ? OR nomprod LIKE ?  LIMIT 50",
+          [words[0], `%${words[0]}%`]
+        );        
+        res.json(result);
+      } else if (words.length === 2) {
+        const [result] = await pool.query(
+          "SELECT * FROM productos WHERE nomprod LIKE ? AND nomprod LIKE ?  LIMIT 50",
+          [`%${words[0]}%`, `%${words[1]}%`]
+        );
+        res.json(result);
+      } else if (words.length >= 3) {
+        const [result] = await pool.query(
+          "SELECT * FROM productos WHERE nomprod LIKE ? AND nomprod LIKE ? AND nomprod LIKE ?  LIMIT 50",
+          [`%${words[0]}%`, `%${words[1]}%`, `%${words[2]}%`]
+        );
+        res.json(result);
+      }
     }
-    else if (words.length >= 3) {
-      const [result] = await pool.query(
-        "SELECT * FROM productos WHERE nomprod LIKE ? AND nomprod LIKE ? AND nomprod LIKE ?",
-        [`%${words[0]}%`, `%${words[1]}%`, `%${words[2]}%`]
-      );
-      res.json(result);
-    }
-    // const [result] = await pool.query(
-    //   "SELECT * FROM productos WHERE codprod = ? OR nomprod LIKE ?",
-    //   [req.params.list]
-    // );
-    // console.log(
-    //   "🚀 ~ file: productos.controllers.js ~ line 106 ~ searchProductos ~ list",
-    //   list
-    // );    
-    // const sql1 = result
-    // const reqParams= req.params;
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }

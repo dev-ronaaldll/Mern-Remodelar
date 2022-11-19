@@ -109,6 +109,7 @@ export const ProductoContextProvider = ({ children }) => {
       // );
       const res = await searchProductosRequest(searchInput);
       console.log("🚀 ~ file: ProductoContext.jsx ~ line 111 ~ searchProductos ~ res", res);
+      setProductos(res.data)
     } catch (error) {
       console.log(
         "🚀 ~ file: ProductoContext.jsx ~ line 109 ~ searchProductos ~ error",
