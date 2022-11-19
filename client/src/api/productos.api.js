@@ -1,21 +1,29 @@
 import axios from "axios";
 
+const remodelarApi = axios.create({ baseURL: "http://192.168.1.101:3000" });
+
 export const getProductosRequest = async () =>
-  await axios.get("http://192.168.1.101:3000/productos");
+  await remodelarApi.get("/productos");
 
 export const createProductoRequest = async (producto) =>
-  await axios.post("http://192.168.1.101:3000/productos", producto);
+  await remodelarApi.post("/productos", producto);
 
 export const deleteProductoRequest = async (codprod) =>
-  await axios.delete(`http://192.168.1.101:3000/productos/${codprod}`);
+  await remodelarApi.delete(`/productos/${codprod}`);
 
 export const getProductoRequest = async (codprod) =>
-  await axios.get(`http://192.168.1.101:3000/productos/${codprod}`);
+  await remodelarApi.get(`/productos/${codprod}`);
 // TODO: STUDY THIS
 export const updateProductoRequest = async (codprod, producto) =>
-  await axios.put(`http://192.168.1.101:3000/productos/${codprod}`, producto);
+  await remodelarApi.put(`/productos/${codprod}`, producto);
 
-export const toggleTaskDoneRequest = async (codprod, done) =>
-  await axios.put(`http://192.168.1.101:3000/productos/${codprod}`, {
-    done,
-  });
+// export const toggleTaskDoneRequest = async (codprod, done) =>
+//   await remodelarApi.put(`/productos/${codprod}`, {
+//     done,
+//   });
+
+export const lastCodeRequest = async () =>
+  await remodelarApi.get("/productos/last");
+
+export const searchProductosRequest = async (listInput) =>
+  await remodelarApi.post("/productos/search", listInput);

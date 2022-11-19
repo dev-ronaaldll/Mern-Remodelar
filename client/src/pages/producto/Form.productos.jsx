@@ -167,8 +167,7 @@ function ProductoForm() {
                 name="codprod"
                 placeholder="codprod"
                 className="col-span-4"
-                required
-                readOnly
+                required                
                 value={values.codprod}
                 // value={codProd}
               />
@@ -212,7 +211,7 @@ function ProductoForm() {
                 required
                 placeholder="venprod"
                 className="col-span-4"
-              />
+              />              
               <label>undfra</label>
               <input
                 value={values.undfra}
@@ -233,15 +232,15 @@ function ProductoForm() {
                 className="col-span-4"
                 required
               />
-            </div>
+            </div>     
             <button
               type="submit"
-              className="bg-zinc-700 w-full"
+              className="bg-zinc-700 w-full "
               disabled={isSubmitting}
               // onClick={() => window.location.reload(false)}
             >
-              {isSubmitting ? "Cargando..." : "Crear Producto"}
-            </button>
+              {params.codprod ? "Update " : isSubmitting ? "Cargando..." : "Crear Producto"}
+            </button>       
           </Form>
         )}
       </Formik>

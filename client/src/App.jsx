@@ -12,7 +12,7 @@ function App() {
         <Navbar />
         <div className="mx-auto py-4 px-5 lg:px-20">
           {/* TODO: FIX */}
-          <ProductoContextProvider>
+          <ProductoContextProvider>            
             <Routes>
               <Route path="/" element={<Productos />} />
               <Route path="/new" element={<ProductoForm />} />

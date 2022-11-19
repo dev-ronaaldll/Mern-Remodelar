@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import ProductoCard from "../../components/ProductoCard";
 import { useProductos } from "../../context/productos/ProductoContext";
-
+import Search from "../../components/Search";
 function Productos() {  
   const {productos,loadProductos}=useProductos()
   useEffect(() => {    
@@ -19,6 +19,7 @@ function Productos() {
   }
   return (
     <div className="text-lg md:text-2xl">
+      <Search />
       <h2>Productos</h2>
       <div className="grid grid-cols-3 text-center">
         <p>Codigo</p>

@@ -1,5 +1,4 @@
 import { pool } from "../db.js";
-
 export const getProductos = async (req, res) => {
   try {
     // TODO : FIX -1 [-5:]
@@ -11,7 +10,6 @@ export const getProductos = async (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 };
-
 export const getProducto = async (req, res) => {
   try {
     const [result] = await pool.query(
@@ -31,12 +29,13 @@ export const createProducto = async (req, res) => {
       codprod,
       codbar,
       nomprod,
-      exiprod,      
+      exiprod,
       venprod,
-      fecapa,      
+      fecapa,
       undfra,
       pvenfra,
     } = req.body;
+    console.log(req.body);
     // if(tipcos===undefined) tipcos = "UC";
     // if(cosulc===undefined) cosulc = 0;
     // if(ivainc===undefined) ivainc = "N";
@@ -44,16 +43,7 @@ export const createProducto = async (req, res) => {
     // if(canven===undefined) canven = 0;
     const [result] = await pool.query(
       "INSERT INTO productos(codprod, codbar, nomprod, exiprod, venprod,  fecapa,  undfra, pvenfra) VALUES (?,?,?,?,?,?,?,?)",
-      [
-        codprod,
-        codbar,
-        nomprod,
-        exiprod,        
-        venprod,
-        fecapa,        
-        undfra,
-        pvenfra,
-      ]
+      [codprod, codbar, nomprod, exiprod, venprod, fecapa, undfra, pvenfra]
     );
     res.json({
       result,
@@ -62,7 +52,6 @@ export const createProducto = async (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 };
-
 export const updateProducto = async (req, res) => {
   try {
     const [result] = await pool.query(
@@ -94,6 +83,51 @@ export const getLastProducto = async (req, res) => {
       "SELECT codprod FROM productos ORDER BY codprod DESC LIMIT 1"
     );
     res.json(result[0]);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+export const searchProductos = async (req, res) => {
+  try {    
+    const { search } = req.body;
+    console.log(
+      "🚀 ~ file: productos.controllers.js ~ line 93 ~ searchProductos ~ search",
+      search
+    );
+    const words = search.split(",");
+    console.log(words);
+    if (words.length === 1) {
+      const [result] = await pool.query(
+        "SELECT * FROM productos WHERE codprod = ? OR nomprod LIKE ?",
+        [words[0], `%${words[0]}%`]
+      );
+      console.log("🚀 ~ file: productos.controllers.js ~ line 105 ~ searchProductos ~ result", result);      
+      res.json(result);
+    }
+    else if (words.length === 2) {
+      const [result] = await pool.query(
+        "SELECT * FROM productos WHERE nomprod LIKE ? AND nomprod LIKE ?",
+        [`%${words[0]}%`, `%${words[1]}%`]
+      );
+      res.json(result);
+    }
+    else if (words.length >= 3) {
+      const [result] = await pool.query(
+        "SELECT * FROM productos WHERE nomprod LIKE ? AND nomprod LIKE ? AND nomprod LIKE ?",
+        [`%${words[0]}%`, `%${words[1]}%`, `%${words[2]}%`]
+      );
+      res.json(result);
+    }
+    // const [result] = await pool.query(
+    //   "SELECT * FROM productos WHERE codprod = ? OR nomprod LIKE ?",
+    //   [req.params.list]
+    // );
+    // console.log(
+    //   "🚀 ~ file: productos.controllers.js ~ line 106 ~ searchProductos ~ list",
+    //   list
+    // );    
+    // const sql1 = result
+    // const reqParams= req.params;
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }

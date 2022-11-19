@@ -5,6 +5,8 @@ import {
   getProductosRequest,
   getProductoRequest,
   updateProductoRequest,
+  lastCodeRequest,
+  searchProductosRequest,
 } from "../../api/productos.api";
 export const ProductoContext = createContext();
 export const useProductos = () => {
@@ -58,8 +60,13 @@ export const ProductoContextProvider = ({ children }) => {
   // async function startVal() {
   const lastCodProd = async () => {
     try {
-      const res = await getProductosRequest();
-      const codProd = parseInt(res.data[0].codprod)+1 || -1;
+      const res = await lastCodeRequest();
+      const codProd = parseInt(res.data.codprod) + 1 || -1;
+      console.log(
+        "🚀 ~ file: ProductoContext.jsx ~ line 63 ~ lastCodProd ~ res",
+        codProd,
+        typeof codProd
+      );
       return codProd;
     } catch (error) {
       console.log(
@@ -94,6 +101,21 @@ export const ProductoContextProvider = ({ children }) => {
       );
     }
   };
+  const searchProductos = async (searchInput) => {
+    try {
+      // console.log(
+      //   "🚀 ~ file: ProductoContext.jsx ~ line 106 ~ searchProductos ~ searchInput",
+      //   searchInput
+      // );
+      const res = await searchProductosRequest(searchInput);
+      console.log("🚀 ~ file: ProductoContext.jsx ~ line 111 ~ searchProductos ~ res", res);
+    } catch (error) {
+      console.log(
+        "🚀 ~ file: ProductoContext.jsx ~ line 109 ~ searchProductos ~ error",
+        error
+      );
+    }
+  };
   return (
     <ProductoContext.Provider
       value={{
@@ -104,6 +126,7 @@ export const ProductoContextProvider = ({ children }) => {
         lastCodProd,
         getProducto,
         updateProducto,
+        searchProductos,
       }}
     >
       {children}

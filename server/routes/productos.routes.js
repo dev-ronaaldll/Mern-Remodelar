@@ -6,11 +6,12 @@ import {
   deleteProducto,
   updateProducto,
   getLastProducto,
+  searchProductos,
 } from "../controllers/productos.controllers.js";
 const router = Router();
-//TODO : limit router points 
-router.get("/productos", getProductos);
+router.post("/productos/search", searchProductos);
 router.get("/productos/last", getLastProducto);
+router.get("/productos", getProductos);
 router.get("/productos/:codprod", getProducto);
 router.post("/productos", createProducto);
 router.put("/productos/:codprod", updateProducto);

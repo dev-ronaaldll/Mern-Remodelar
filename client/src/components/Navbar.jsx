@@ -10,13 +10,13 @@ function Navbar() {
       <ul className="flex gap-x-1 bg-neutral-700 py-4 px-10 font-bold">
         <li>
           <Link to="/" className=" px-2 py-1 ">
-            Home
+            Productos
           </Link>
         </li>
         <li>-</li>
         <li>
           <Link to="/new" className=" px-2 py-1">
-            Form 
+            Crear
           </Link>
         </li>
       </ul>
