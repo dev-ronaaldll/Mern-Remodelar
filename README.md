@@ -1,8 +1,16 @@
 "/"
 
     last 5 products added
+    
+![image](https://user-images.githubusercontent.com/93483481/203159318-5f17a47d-faad-4790-a1df-e770a0283ecf.png)
 
-![image](https://user-images.githubusercontent.com/93483481/202043129-85c13eb7-645a-4253-88d3-35d83c1b708b.png)
+search by codprod or 3 params split by ,
+
+![image](https://user-images.githubusercontent.com/93483481/203159252-319b7636-d6da-47e7-83b2-34da28247215.png)
+
+![image](https://user-images.githubusercontent.com/93483481/203159460-f8e0832a-f29c-4fc8-92b4-40b1fcfb1689.png)
+
+
 
 "/new"
 
